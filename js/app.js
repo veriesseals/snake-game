@@ -88,7 +88,7 @@ const init = () => {
         moveSnake();
         // Call game again(INIT)
         init();
-    }, 100);// Run this function every 100ms
+    }, 200);// Run this function every 100ms
 }
 
 // Change direction
@@ -127,10 +127,22 @@ const changeDirection = (e) => {
         dx = 0;
         dy = 10;
     }
+
+    const hasGameEnded = () => {
+        for (let i = 4; i < snake.length; i++) {
+            const hasCollided = snake[i].x === snake[0].x && snake[i].y === snake[0].y
+            if (hasCollided) return true
+        }
+        const hitLeftWall = snake[0].x < 0;
+        const hitRightWall = snake[0].x > snakeBoard.width - 10;
+        const hitToptWall = snake[0].y < 0;
+        const hitBottomWall = snake[0].y > snakeBoard.height - 10;
+        return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall
+    }
+
+    
 }
 
-// Collision
-// ----------------------------------------------------------
 
 
 
